@@ -1,65 +1,99 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.buttonRow {
+    margin: 20px;
+}
+
+.leftCol {
+    width: 40%;
+    float: left;
+
+    background-color: aliceblue;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.rightCol {
+    width: 60%;
+
+    float: left;
+    background-color: lightyellow;
+}
+
+.buttonLeft {
+    border-radius: 25px 0px 0px 25px;
+    width: 80px;
+    padding: 10px;
+}
+
+.buttonRight {
+    border-radius: 0px 25px 25px 0px;
+    width: 80px;
+    padding: 10px;
+}
+
+
+/*//todo sticky header*/
+.header {
+    background-image: url("https://res.cloudinary.com/osidekweenyasss/image/upload/v1566691836/poke2.jpg");
+    background-repeat: no-repeat;
+
+    background-position: right;
+    height: 200px;
+}
+
+.PokeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.PokeCard {
+    height: 150px;
+    width: 150px;
+    margin: 20px;
+    background-color: ;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 .container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  }
-
- .weatherText {;
-  font-size: 150%;
- } 
-
-.currentTemp {
-  font-size: 300%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
-.blueWeatherBox {
-  height: 400px;
-  width: 400px;
-  color: white;
-  background-image: url("https://res.cloudinary.com/osidekweenyasss/image/upload/v1566671316/atmosphere-beautiful-blue-531767.jpg");
-  background-position: center; 
-  border-radius: 25px;
-}
-
-.cloudy {
-  background-image: url("https://res.cloudinary.com/osidekweenyasss/image/upload/v1566671316/atmosphere-beautiful-blue-531767.jpg");
-}
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+    from {
+        transform: rotate(0deg);
+    }
 
-input {
-  border-radius: 25px;
-  background-color: lightgreen;
+    to {
+        transform: rotate(360deg);
+    }
 }

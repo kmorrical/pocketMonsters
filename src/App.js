@@ -1,96 +1,71 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import SearchBar from './searchBar.js'
-import WeatherBox from './WeatherBox.js'
+import PokeContainer from './PokeContainer.js'
+import SingleMonsterDetail from './SingleMonsterDetail.js'
+
+const monstersAPI = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151";
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            weeatherData: [],
-            city: 'London,uk',
-            defaultCity: 'London,uk',
-            deafultPath: 'london%2Cuk',
-            path: 'london%2Cuk',
-            conditions: '',
-            lowTemp: 0,
-            highTemp: 0,
-            humidity: 0,
-            currentTemp: 0,
+            monsters: [],
+            singleMonsterVisible: false,
+            singleMonster: null,
+            leftStyle: { 'background-color': 'white' },
+            rightStyle: { 'background-color': 'orange' }
         };
-        this.fetchCityWeather = this.fetchCityWeather.bind(this);
-    };
-
-
-    formatCity = (city) => {
-        const cityCopy = city.slice();
-        for (var i = 0; i < cityCopy; i++) {
-            if (cityCopy[i] === " ") {
-                cityCopy[i] = "%20";
-            }
-            if (cityCopy[i] === ",") {
-                cityCopy[i] = "%2";
-            }
-        }
-        this.setState({ path: cityCopy });
-        return cityCopy;
+        //do binds here ifnecessary
+        // this.functionName = this.functionName.bind(this);
     };
 
     componentDidMount() {
-        this.fetchCityWeather(this.state.defaultCity);
+        this.fetchMonsters();
     }
 
-    fetchCityWeather(city) {
-        let path;
-        // path = this.formatCity(city);
-        const cityCopy = city.slice();
-        for (var i = 0; i < cityCopy; i++) {
-            if (cityCopy[i] === " ") {
-                cityCopy[i] = "%20";
-            }
-            if (cityCopy[i] === ",") {
-                cityCopy[i] = "%2";
-            }
-        }
-        path = cityCopy;
-        fetch("https://community-open-weather-map.p.rapidapi.com/forecast?q=" + path, {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-                    "x-rapidapi-key": "CsnQC0v2Z8mshebeRSE12ssavaRvp1gSSQOjsnpCBe80cTfCI1"
-                },
-                "type": "JSON"
-            })
-            .then(response => {
-                return response.text();
-            })
-            .then(res => {
-                const json = JSON.parse(res);
-                this.setState({
-                    conditions: json.list[0].weather[0].main,
-                    lowTemp: json.list[0].main.temp_min,
-                    highTemp: json.list[0].main.temp_max,
-                    currentTemp: json.list[0].main.temp,
-                    humidity: json.list[0].main.humidity,
-                    city: city
-                });
+    fetchMonsters = async () => {
+        const response = await fetch(monstersAPI);
+        const json = await response.json();
+        console.log("JSON!!", json);
+        this.setState({ monsters: json.results });
 
-                // this.setState({weather: })
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    }
+
+    singleMonsterVisible = (index) => {
+        console.log("INDEX", index);
+        this.setState({ singleMonster: index });
+        this.setState({ singleMonsterVisible: true });
+
+    }
+
+    accessSaved = () => {
+        this.setState({ leftStyle: { 'background-color': 'orange' }, rightStyle: { 'background-color': 'white' } })
+    }
+
+    accessAll = () => {
+        this.setState({ leftStyle: { 'background-color': 'white' }, rightStyle: { 'background-color': 'orange' } })
     }
 
     render() {
+        const { monsters, singleMonsterVisible, leftStyle, rightStyle } = this.state;
         return (
-          <div className="App">
-            Please enter a city to see results
-            <SearchBar defaultCity={this.state.city} fetchCityData={this.fetchCityWeather}/>
-            <WeatherBox city={this.state.city} lowTemp={this.state.lowTemp} highTemp={this.state.highTemp} humidity={this.state.humidity}
-              currentTemp={this.state.currentTemp} conditions={this.state.conditions}/>
+            <div className="App">
+              {!singleMonsterVisible ? 
+                <>
+                    <div className="header">
+                        <h1>Gotta Catch 'Em All!</h1>
+                        <h2>San Diego Pokédex</h2>
+                    </div>
+                    <div className="buttonRow">
+                        <button className="buttonLeft" style={leftStyle} onClick={this.accessSaved}>Saved</button>
+                        <button className="buttonRight" style={rightStyle} onClick={this.accessAll}>All</button>
+                    </div>
+                    <PokeContainer monsters={monsters} singleMonsterVisible={this.singleMonsterVisible}/>
+                </> :
+              <SingleMonsterDetail />  
+            }
           </div>
         );
     }
