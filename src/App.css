@@ -19,26 +19,56 @@
     color: white;
 }
 
+.searchBar {
+    border-radius: 25px 25px 25px 25px;
+}
+
 .buttonRow {
     margin: 20px;
 }
 
+.map{
+    display: flex;
+    margin-bottom: 50px;
+    margin-left: 40px;
+    text-align: center;
+}
 .leftCol {
     width: 40%;
     float: left;
-
     background-color: aliceblue;
+    text-align: left;
+    margin-top: 50px;
 }
 
+.abilities {
+    margin-top: 400px;
+    text-align: left;
+    margin-left: 40px;
+}
+
+.monsterDetails {
+    margin-left: 20px;
+}
 .alignCenter {
     text-align: center;
 }
 
 .rightCol {
     width: 60%;
-
+    display: flex;
+    flex-direction: column;
     float: left;
     background-color: lightyellow;
+}
+
+.closeDetailButton {
+    float: right;
+    margin-right: 20px;
+    background-color: red;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
 }
 
 .buttonLeft {
@@ -52,6 +82,21 @@
     width: 80px;
     padding: 10px;
 }
+
+.buttonLeftSearch {
+    border-radius: 5px 0px 0px 5px;
+    width: 100px;
+    padding: 10px;
+}
+
+.buttonRightSearch {
+    border-radius: 0px 5px 5px 0px;
+    border: none;
+    width: 50px;
+    padding: 12px;
+    background-color: lightgray;
+}
+
 
 
 /*//todo sticky header*/
@@ -74,7 +119,6 @@
     height: 150px;
     width: 150px;
     margin: 20px;
-    background-color: ;
 }
 
 .App-link {

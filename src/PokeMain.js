@@ -6,7 +6,7 @@ import SingleMonsterDetail from './SingleMonsterDetail.js'
 
 const monstersAPI = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151";
 
-class App extends Component {
+class PokeMain extends Component {
     constructor(props) {
         super(props);
 
@@ -25,32 +25,7 @@ class App extends Component {
         // this.functionName = this.functionName.bind(this);
     };
 
-    componentDidMount() {
-         this.fetchMonsters();
-    }
 
-
-    fetchMonsters = async () => {
-        let individualData = [];
-        const response = await fetch(monstersAPI);
-        const json = await response.json();
-        let monstersCopy = json.results.slice();
-        await this.fetchMonsterData(monstersCopy);
-    };
-
-
-    fetchMonsterData = async (monstersCopy) => {
-        for(let i=0; i< monstersCopy.length;i++){
-            const baseAPI = "https://pokeapi.co/api/v2/pokemon/";
-            const name = monstersCopy[i].name;
-            const newAPI = baseAPI + name;
-            const response = await fetch(newAPI)
-            const json = await response.json()
-
-            monstersCopy[i].additionalInfo = json;
-        }
-         this.setState({monsters: monstersCopy, activeMonsters: monstersCopy})
-    }
     //selects pokemon to look at individually
     singleMonsterVisible = (index) => {
         console.log("INDEX", index);
@@ -81,12 +56,10 @@ class App extends Component {
     }
 
     changeSearchVal = (event) => {
-        event.preventDefault()
         this.setState({searchVal: event.target.value});
     }
 
     searchMonsters = (event) => {
-        event.preventDefault()
         console.log("SEARCH VAL", this.state.searchVal);
 
     }
@@ -124,7 +97,9 @@ class App extends Component {
     }
 
     render() {
-        const { monsters, singleMonsterVisible, leftStyle, rightStyle, singleMonster, activeMonsters, singleMonsterLocations } = this.state;
+        const {monsters, singleMonsterVisible, leftStyle, rightStyle, singleMonster, activeMonsters, singleMonsterLocations } = this.state;
+        const {fetchedMonsters} = this.props;
+        this.setState({monsters: fetchedMonsters, activeMonsters: fetchedMonsters});
         return (
             <div className="App">
               {!singleMonsterVisible ? 
@@ -149,4 +124,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default PokeMain;
