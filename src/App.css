@@ -36,7 +36,6 @@
 .leftCol {
     width: 40%;
     float: left;
-    background-color: aliceblue;
     text-align: left;
     margin-top: 50px;
 }
@@ -59,7 +58,6 @@
     display: flex;
     flex-direction: column;
     float: left;
-    background-color: lightyellow;
 }
 
 .closeDetailButton {
@@ -108,11 +106,23 @@
     height: 200px;
 }
 
+.photoBox {
+    text-align: center;
+}
+
 .PokeContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 
+}
+
+.pokeImg {
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    border: 1px solid darkgray;
+    border-radius: 5px;
 }
 
 .PokeCard {

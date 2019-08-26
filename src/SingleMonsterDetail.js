@@ -27,6 +27,7 @@ class SingleMonsterDetail extends Component {
 
     render() {
       const {saveMonster, removeMonster, activeMonster, locations, closeDetail} = this.props;
+      console.log(this.props.activeMonster);
         return (
 
           <div className="SingleMonsterDetail">
@@ -35,12 +36,12 @@ class SingleMonsterDetail extends Component {
           </div>
             <div className="leftCol">
               <div className="photoBox">
-                <div>PHOTO GOES HERE</div>
-                <p className="alignCenter">NAME HERE</p>
+                <img src={activeMonster.additionalInfo.sprites.front_default} className="pokeImg"/>
+                <p className="alignCenter">{activeMonster.name.toUpperCase()}</p>
               </div>
               <div className="monsterDetails">
-              <p>Height</p>
-              <p>Weight</p>
+              <p>Height: {activeMonster.additionalInfo.height}</p>
+              <p>Weight: {activeMonster.additionalInfo.weight}</p>
               <p>In Bag <input type="checkbox" onChange={this.changeCheckbox}/></p>
               <div>
                 <p>Type1</p>
@@ -56,7 +57,10 @@ class SingleMonsterDetail extends Component {
                 <MonsterMap locations={locations}/>
               </div>
               <div className="abilities">
-              <p>Abilities</p>
+              <b>Abilities:</b>
+                   {activeMonster.additionalInfo.abilities.map(function(ability, i){
+              return <p key={i}>{ability.ability.name}</p>;
+              })}
               </div>
             </div>
           </div>

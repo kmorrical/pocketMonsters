@@ -54,7 +54,7 @@ class App extends Component {
     //selects pokemon to look at individually
     singleMonsterVisible = (index) => {
         console.log("INDEX", index);
-        this.setState({ singleMonster: index });
+        this.setState({ singleMonster: this.state.activeMonsters[index] });
         this.setState({ singleMonsterVisible: true });
 
                 fetch("https://api.craft-demo.net/pokemon/1", {

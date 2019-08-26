@@ -16,9 +16,12 @@ class PokeCard extends Component {
 
       let randomColor = Math.floor(Math.random()*16777215).toString(16);
       const {monster, singleMonsterVisible, index} = this.props;
+      console.log("MONSTER!", monster.additionalInfo.sprites);
       return(
-          <div className="PokeCard" style={{backgroundColor: "#" + randomColor}} 
-            onClick={() => singleMonsterVisible(index)}>{monster.name}
+          <div className="PokeCard" 
+            onClick={() => singleMonsterVisible(index)}>
+            <img src={monster.additionalInfo.sprites.front_default} className="pokeImg"/>
+            {(monster.name).toUpperCase()}
           </div>
         );
     }
