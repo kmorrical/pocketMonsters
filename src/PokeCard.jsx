@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
 
 function PokeCard(props) {
 
@@ -8,7 +7,7 @@ function PokeCard(props) {
       return(
           <div className="PokeCard" 
             onClick={() => singleMonsterVisible(index)}>
-            <img src={monster.additionalInfo.sprites.front_default} className="pokeImg"/>
+            <img alt={monster.name} src={monster.additionalInfo.sprites.front_default} className="pokeImg"/>
             {(monster.name).toUpperCase()}
           </div>
         );

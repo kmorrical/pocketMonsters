@@ -27,6 +27,12 @@
     margin: 20px;
 }
 
+.link {
+    color: blue;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
 .map{
     display: flex;
     margin-bottom: 50px;
@@ -49,6 +55,7 @@
 .monsterDetails {
     margin-left: 20px;
 }
+
 .alignCenter {
     text-align: center;
 }
@@ -95,9 +102,7 @@
     background-color: lightgray;
 }
 
-
-
-/*//todo sticky header*/
+/*//todo sticky header?*/
 .header {
     background-image: url("https://res.cloudinary.com/osidekweenyasss/image/upload/v1566691836/poke2.jpg");
     background-repeat: no-repeat;
@@ -121,7 +126,7 @@
     height: 150px;
     width: 150px;
     text-align: center;
-    border: 1px solid darkgray;
+    border: 2px solid darkgray;
     border-radius: 5px;
 }
 
