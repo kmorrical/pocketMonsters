@@ -11,10 +11,10 @@ function SingleMonsterDetail(props) {
       const checked = event.target.checked;
 
       if (checked) {
-        saveMonster(props.activeMonster);
+        saveMonster(activeMonster);
       }
       else {
-        removeMonster(props.activeMonster);
+        removeMonster(activeMonster);
       }
     }
 

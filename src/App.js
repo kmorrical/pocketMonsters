@@ -31,11 +31,19 @@ class App extends Component {
     };
 
     fetchMonsters = async () => {
-        const response = await fetch(monstersAPI);
-        const json = await response.json();
-        let monstersCopy = json.results.slice();
-        await this.fetchMonsterData(monstersCopy);
+        //set loading to true before fetch to activate spinner
+        this.setState({loading: true});
+        let monstersCopy;
+
+        const json = await fetch(monstersAPI)
+                .then(response => response.json())
+                .then(json => {monstersCopy = json.results})
+                .then(() => {this.fetchMonsterData(monstersCopy)})
+                .catch(err => {
+                    console.log(err);
+                });
     };
+
 
     fetchMonsterData = async (monstersCopy) => {
         for(let i=0; i< monstersCopy.length;i++){
@@ -45,12 +53,14 @@ class App extends Component {
             const response = await fetch(newAPI)
             const json = await response.json()
             monstersCopy[i].additionalInfo = json;
-            monstersCopy[i].InBag = false;
+            monstersCopy[i].InBag = false;  
         }
-         this.setState({monsters: monstersCopy, activeMonsters: monstersCopy})
+        //when complete loading spinner goes away
+         this.setState({monsters: monstersCopy, activeMonsters: monstersCopy, loading: false})
     };
 
     //selects pokemon to look at individually
+    //would have possibl placed these as properties of the pokemon themselves but i am assuming these locations change often
     singleMonsterVisible = (index) => {
         this.setState({ singleMonster: this.state.activeMonsters[index] });
         this.setState({ singleMonsterVisible: true });
@@ -70,6 +80,7 @@ class App extends Component {
                 this.setState({singleMonsterLocations: json.locations});
             })
             .catch(err => {
+                console.log(err);
             });
     };
 
@@ -87,28 +98,31 @@ class App extends Component {
 
     closeDetail = (event) => {
         this.setState({singleMonsterVisible: false});
+        this.accessAll();
     };
 
-    saveMonster = (index) => {
+    saveMonster = (saveMonster) => {
         const {savedMonsters, monsters} = this.state;
         const savedMonstersCopy = savedMonsters.slice();
         const monstersCopy = monsters.slice();
-        const monsterIndex = findIndex(monstersCopy, function(o) { return o.name === index.name; });
+        const monsterIndex = findIndex(monstersCopy, function(o) { return o.name === saveMonster.name; });
         
         savedMonstersCopy.push(monstersCopy[monsterIndex]);
-        this.setState({savedMonsters: savedMonstersCopy, monsters: [...monsters, monsters[monsterIndex].InBag = true] });
+        monstersCopy[monsterIndex].InBag = true;
+        this.setState({savedMonsters: savedMonstersCopy, monsters: monstersCopy});
     };
 
-    removeMonster = (index) => {
+    removeMonster = (removeMonster) => {
         const {savedMonsters, monsters} = this.state;
         let savedMonstersCopy = savedMonsters.splice();
+        const monstersCopy = monsters.slice();
 
-        for( let i = 0; i < savedMonstersCopy.length; i++){ 
-            if ( savedMonstersCopy[i] === index) {
-            savedMonstersCopy.splice(i, 1); 
-            }
-        }
-        this.setState({savedMonsters: savedMonstersCopy, monsters: [...monsters, monsters[index].InBag = false]})
+        const monsterIndex = findIndex(monstersCopy, function(o) { return o.name === removeMonster.name; });
+        const savedMonsterIndex = findIndex(savedMonstersCopy, function(o) { return o.name === removeMonster.name; });
+        savedMonstersCopy.splice(savedMonsterIndex, 1);
+
+        monstersCopy[monsterIndex].InBag = false;
+        this.setState({savedMonsters: savedMonstersCopy, monsters: monstersCopy});
     };
 
     accessSaved = () => {
@@ -118,14 +132,8 @@ class App extends Component {
     };
 
     accessAll = () => {
-
         const {monsters} = this.state;
-    
-
-
-        this.setState({ leftStyle: { backgroundColor: 'white' }, rightStyle: { backgroundColor: 'orange' } , activeMonsters: monsters})
-
-
+        this.setState({ leftStyle: { backgroundColor: 'white' }, rightStyle: { backgroundColor: 'orange' } , activeMonsters: monsters});
     };
 
     clearSelected = () => {
@@ -140,7 +148,8 @@ class App extends Component {
                 singleMonster, 
                 activeMonsters, 
                 singleMonsterLocations, 
-                searchMode } 
+                searchMode,
+                loading } 
                 = this.state;
 
         let clearSelected = null;
@@ -162,7 +171,8 @@ class App extends Component {
                                 activeMonsters={activeMonsters}
                                 singleMonsterVisible={this.singleMonsterVisible}
                                 leftStyle={leftStyle}
-                                rightStyle={rightStyle} />
+                                rightStyle={rightStyle}
+                                loading={loading} />
         } else {
            view = <SingleMonsterDetail saveMonster={this.saveMonster} 
                                        closeDetail={this.closeDetail} 

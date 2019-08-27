@@ -3,7 +3,7 @@ import React from 'react';
 function PokeCard(props) {
 
       const {monster, singleMonsterVisible, index} = props;
-
+   
       return(
           <div className="PokeCard" 
             onClick={() => singleMonsterVisible(index)}>

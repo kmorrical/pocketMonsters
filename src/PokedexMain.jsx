@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PokeContainer from './PokeContainer.jsx'
 
 function PokedexMain(props) {
@@ -10,12 +10,12 @@ function PokedexMain(props) {
     		activeMonsters, 
     		singleMonsterVisible,
     		leftStyle,
+    		loading,
     		rightStyle 
     		} = props;
 
-        return (
-         		<div>
-                    <div className="header">
+        return (<div>
+                    <div className="header">                                                
                         <h1>Gotta Catch 'Em All!</h1>
                         <h2>San Diego Pokédex</h2>
                     </div>
@@ -28,7 +28,11 @@ function PokedexMain(props) {
                         <button className="buttonRightSearch" onClick={searchMonsters}>Go!</button>
                             {clearSelected}
                     </div>
-                    <PokeContainer monsters={activeMonsters} singleMonsterVisible={singleMonsterVisible}/>
+                    {loading ? 
+                    	(<div className="loaderBox">
+                    		<div className="loader"/>
+                    	</div>) :
+                    	(<PokeContainer monsters={activeMonsters} singleMonsterVisible={singleMonsterVisible}/>)}
                 </div> 
         );
 }
