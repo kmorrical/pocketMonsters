@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import PokeContainer from './PokeContainer.js'
 import SingleMonsterDetail from './SingleMonsterDetail.js'
+import findIndex from 'lodash/findIndex'
 
 const monstersAPI = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151";
 
@@ -15,14 +15,12 @@ class App extends Component {
             savedMonsters: [],
             singleMonsterVisible: false,
             singleMonster: null,
-            leftStyle: { 'background-color': 'white' },
-            rightStyle: { 'background-color': 'orange' },
+            leftStyle: { backgroundColor: 'white' },
+            rightStyle: { backgroundColor: 'orange' },
             activeMonsters: [],
             searchVal: '',
             singleMonsterLocations: []
         };
-        //do binds here ifnecessary
-        // this.functionName = this.functionName.bind(this);
     };
 
     componentDidMount() {
@@ -53,7 +51,6 @@ class App extends Component {
     }
     //selects pokemon to look at individually
     singleMonsterVisible = (index) => {
-        console.log("INDEX", index);
         this.setState({ singleMonster: this.state.activeMonsters[index] });
         this.setState({ singleMonsterVisible: true });
 
@@ -65,17 +62,14 @@ class App extends Component {
                 "type": "JSON"
             })
             .then(response => {
-                console.log(response);
                 return response.text();
             })
             .then(res => {
                 const json = JSON.parse(res);
-                console.log(json.locations);
                 this.setState({singleMonsterLocations: json.locations});
 
             })
             .catch(err => {
-                console.log(err);
             });
 
     }
@@ -87,7 +81,6 @@ class App extends Component {
 
     searchMonsters = (event) => {
         event.preventDefault()
-        console.log("SEARCH VAL", this.state.searchVal);
 
     }
 
@@ -96,30 +89,32 @@ class App extends Component {
     }
 
     saveMonster = (index) => {
-        console.log("save it");
-        this.state.savedMonsters.push(this.state.monsters[index]);
-        console.log(this.state.savedMonsters);
+        const savedMonstersCopy = this.state.savedMonsters.slice();
+        const monstersCopy = this.state.monsters.slice();
+        const monsterIndex = findIndex(monstersCopy, function(o) { return o.name == index.name; });
+
+        savedMonstersCopy.push(monstersCopy[monsterIndex]);
+
+        this.setState({savedMonsters: savedMonstersCopy});
     };
 
     removeMonster = (index) => {
-        console.log("remove it");
         let savedMonstersCopy = this.state.savedMonsters.splice();
         for( var i = 0; i < savedMonstersCopy.length; i++){ 
             if ( savedMonstersCopy[i] === index) {
             savedMonstersCopy.splice(i, 1); 
-        }
+            }
         }
         this.setState({savedMonsters: savedMonstersCopy})
-        console.log(this.state.savedMonstersCopy);
     };
 
     accessSaved = () => {
-        this.setState({ leftStyle: { 'background-color': 'orange' }, rightStyle: { 'background-color': 'white' } });
+        this.setState({ leftStyle: { backgroundColor: 'orange' }, rightStyle: { backgroundColor: 'white' } });
         this.setState({activeMonsters: this.state.savedMonsters});
     }
 
     accessAll = () => {
-        this.setState({ leftStyle: { 'background-color': 'white' }, rightStyle: { 'background-color': 'orange' } })
+        this.setState({ leftStyle: { backgroundColor: 'white' }, rightStyle: { backgroundColor: 'orange' } })
         this.setState({activeMonsters: this.state.monsters})
     }
 

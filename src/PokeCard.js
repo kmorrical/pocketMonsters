@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+function PokeCard(props) {
 
-class PokeCard extends Component {
-    constructor(props) {
-        super(props);
+      const {monster, singleMonsterVisible, index} = props;
 
-        this.state = {
-
-        };
-    };
-
-    render() {
-
-      let randomColor = Math.floor(Math.random()*16777215).toString(16);
-      const {monster, singleMonsterVisible, index} = this.props;
-      console.log("MONSTER!", monster.additionalInfo.sprites);
       return(
           <div className="PokeCard" 
             onClick={() => singleMonsterVisible(index)}>
@@ -24,13 +12,7 @@ class PokeCard extends Component {
             {(monster.name).toUpperCase()}
           </div>
         );
-    }
 }
 
 export default PokeCard;
 
-
-
-          //might need these
-         // onMouseEnter={}
-         //  onMouseLeave={}
