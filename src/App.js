@@ -27,7 +27,6 @@ class App extends Component {
 
     componentDidMount() {
          this.fetchMonsters();
-         //todo set timeout here?
     };
 
     fetchMonsters = async () => {
@@ -88,10 +87,11 @@ class App extends Component {
         this.setState({searchVal: event.target.value});
     };
 
-    searchMonsters = (event) => {
-        const {searchVal, activeMonsters} = this.state;
-        var found = [];
-        const foundMonster = find(activeMonsters, function(o) { return o.name === searchVal; });
+    searchMonsters = (term) => {
+        const {activeMonsters} = this.state;
+        let found = [];
+        const foundMonster = find(activeMonsters, function(o) { return o.name === term; });
+
         found.push(foundMonster);
         this.setState({activeMonsters: found, searchMode: true});
     };
@@ -101,29 +101,24 @@ class App extends Component {
         this.accessAll();
     };
 
-    saveMonster = (saveMonster) => {
+    saveRemoveMonster = (saveMonster, save) => {
         const {savedMonsters, monsters} = this.state;
         const savedMonstersCopy = savedMonsters.slice();
         const monstersCopy = monsters.slice();
         const monsterIndex = findIndex(monstersCopy, function(o) { return o.name === saveMonster.name; });
-        
-        savedMonstersCopy.push(monstersCopy[monsterIndex]);
-        monstersCopy[monsterIndex].InBag = true;
+
+        if (save) {
+             savedMonstersCopy.push(monstersCopy[monsterIndex]);
+            monstersCopy[monsterIndex].InBag = true;
+        }
+        else {
+            const savedMonsterIndex = findIndex(savedMonstersCopy, function(o) { return o.name === saveMonster.name; });
+            savedMonstersCopy.splice(savedMonsterIndex, 1);
+            monstersCopy[monsterIndex].InBag = false;
+        }
+
         this.setState({savedMonsters: savedMonstersCopy, monsters: monstersCopy});
-    };
-
-    removeMonster = (removeMonster) => {
-        const {savedMonsters, monsters} = this.state;
-        let savedMonstersCopy = savedMonsters.splice();
-        const monstersCopy = monsters.slice();
-
-        const monsterIndex = findIndex(monstersCopy, function(o) { return o.name === removeMonster.name; });
-        const savedMonsterIndex = findIndex(savedMonstersCopy, function(o) { return o.name === removeMonster.name; });
-        savedMonstersCopy.splice(savedMonsterIndex, 1);
-
-        monstersCopy[monsterIndex].InBag = false;
-        this.setState({savedMonsters: savedMonstersCopy, monsters: monstersCopy});
-    };
+    }
 
     accessSaved = () => {
         const {savedMonsters} = this.state;
@@ -174,10 +169,9 @@ class App extends Component {
                                 rightStyle={rightStyle}
                                 loading={loading} />
         } else {
-           view = <SingleMonsterDetail saveMonster={this.saveMonster} 
+           view = <SingleMonsterDetail saveRemoveMonster={this.saveRemoveMonster} 
                                        closeDetail={this.closeDetail} 
                                        locations={singleMonsterLocations} 
-                                       removeMonster={this.removeMonster} 
                                        activeMonster={singleMonster}/> 
         }      
 

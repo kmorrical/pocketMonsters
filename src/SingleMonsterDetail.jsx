@@ -5,16 +5,16 @@ const mockText = "Lorem ipsum dolor sit amet, purus sodales sit autem leo, amet 
 
 function SingleMonsterDetail(props) {
 
-    const {saveMonster, removeMonster, activeMonster, locations, closeDetail} = props;
+    const {saveRemoveMonster, activeMonster, locations, closeDetail} = props;
 
     function changeCheckbox(event) {
       const checked = event.target.checked;
 
       if (checked) {
-        saveMonster(activeMonster);
+        saveRemoveMonster(activeMonster, true);
       }
       else {
-        removeMonster(activeMonster);
+        saveRemoveMonster(activeMonster, false);
       }
     }
 

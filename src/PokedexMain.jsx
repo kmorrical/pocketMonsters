@@ -5,16 +5,18 @@ function PokedexMain(props) {
     const { accessSaved, 
     		accessAll, 
     		changeSearchVal, 
-    		searchMonsters, 
-    		clearSelected, 
+    		searchMonsters,  
     		activeMonsters, 
     		singleMonsterVisible,
     		leftStyle,
     		loading,
-    		rightStyle 
+    		rightStyle,
     		} = props;
 
-        return (<div>
+    	const [searchTerm, setSearch] = useState("");	
+
+        return (
+        		<div>
                     <div className="header">                                                
                         <h1>Gotta Catch 'Em All!</h1>
                         <h2>San Diego Pokédex</h2>
@@ -24,9 +26,9 @@ function PokedexMain(props) {
                         <button className="buttonRight" style={rightStyle} onClick={accessAll}>All</button>
                     </div>
                     <div>
-                        <input type="text" className="buttonLeftSearch" placeholder="Search..." onChange={changeSearchVal}></input>
-                        <button className="buttonRightSearch" onClick={searchMonsters}>Go!</button>
-                            {clearSelected}
+                        <input type="text" className="buttonLeftSearch" placeholder="Search..." value={searchTerm}
+        					onChange={e => setSearch(e.target.value)}/>
+                        <button className="buttonRightSearch" onClick={()=>searchMonsters(searchTerm)}>Go!</button>
                     </div>
                     {loading ? 
                     	(<div className="loaderBox">
