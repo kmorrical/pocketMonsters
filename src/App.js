@@ -43,7 +43,8 @@ class App extends Component {
                 });
     };
 
-
+    //since photos, skills, additional info are in the other api, i thought i might as well get 
+    //this all on load and then store it in a state object here (since not using redux or back end)
     fetchMonsterData = async (monstersCopy) => {
         for(let i=0; i< monstersCopy.length;i++){
             const baseAPI = "https://pokeapi.co/api/v2/pokemon/";
@@ -96,6 +97,7 @@ class App extends Component {
         this.setState({activeMonsters: found, searchMode: true});
     };
 
+    //return to page with all pokemon
     closeDetail = (event) => {
         this.setState({singleMonsterVisible: false});
         this.accessAll();

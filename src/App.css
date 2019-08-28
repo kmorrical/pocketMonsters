@@ -33,18 +33,10 @@
     cursor: pointer;
 }
 
-.map{
-    display: flex;
-    margin-bottom: 50px;
-    margin-left: 40px;
-    text-align: center;
-    height: auto;
-    width: auto;
+.MonsterMap {
+    margin-left: 40px !important;
 }
 
-.MonsterMap {
-    display: flex
-}
 .leftCol {
     width: 40%;
     float: left;
@@ -53,8 +45,8 @@
 }
 
 .abilities {
-    margin-top: 350px;
     text-align: left;
+    margin-top: 53%;
     margin-left: 40px;
 }
 
@@ -145,6 +137,7 @@
     justify-content: center;
 
 }
+
 
 .pokeImg {
     height: 150px;
