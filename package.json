@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.19.0",
     "bootstrap": "^3.4.1",
     "google-maps-react": "^2.0.2",
     "react": "^16.9.0",
@@ -43,7 +44,7 @@
     ]
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/kmorrical/pocketMonsters"
-}
+    "type": "git",
+    "url": "https://github.com/kmorrical/pocketMonsters"
+  }
 }

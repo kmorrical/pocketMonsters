@@ -62,10 +62,11 @@ class App extends Component {
     //selects pokemon to look at individually
     //would have possibl placed these as properties of the pokemon themselves but i am assuming these locations change often
     singleMonsterVisible = (index) => {
-        this.setState({ singleMonster: this.state.activeMonsters[index] });
-        this.setState({ singleMonsterVisible: true });
+        const {monsters, activeMonsters} = this.state;
 
-        fetch("https://api.craft-demo.net/pokemon/1", {
+        const apiIndex = findIndex(monsters, function(o) { return o.name === activeMonsters[index].name; });
+
+        fetch("https://api.craft-demo.net/pokemon/" + apiIndex, {
                 "method": "GET",
                 "headers": {
                     "x-api-key": "HHko9Fuxf293b3w56zAJ89s3IcO9D5enaEPIg86l"
@@ -82,6 +83,9 @@ class App extends Component {
             .catch(err => {
                 console.log(err);
             });
+
+        this.setState({ singleMonster: activeMonsters[index] });
+        this.setState({ singleMonsterVisible: true });
     };
 
     changeSearchVal = (event) => {
