@@ -34,7 +34,7 @@ class App extends Component {
         this.setState({loading: true});
         let monstersCopy;
 
-        const json = await fetch(monstersAPI)
+        await fetch(monstersAPI)
                 .then(response => response.json())
                 .then(json => {monstersCopy = json.results})
                 .then(() => {this.fetchMonsterData(monstersCopy)})
@@ -97,7 +97,7 @@ class App extends Component {
         this.setState({activeMonsters: found, searchMode: true});
     };
 
-    //return to page with all pokemon
+    //return to page with this
     closeDetail = (event) => {
         this.setState({singleMonsterVisible: false});
         this.accessAll();
@@ -145,18 +145,10 @@ class App extends Component {
                 singleMonster, 
                 activeMonsters, 
                 singleMonsterLocations, 
-                searchMode,
                 loading } 
                 = this.state;
 
-        let clearSelected = null;
         let view;        
-
-        if (searchMode) {
-            clearSelected = <p className="link" onClick={this.clearSelected}>Clear Search</p>
-        } else {
-            clearSelected = null
-        }
         
         // conditional rendering was my solution to a to the api being called over and over and over
         if (!singleMonsterVisible) {
