@@ -19,11 +19,7 @@ function PokedexMain(props) {
 
     return (
         <div>
-            <div
-                className="header"
-                style={{
-                fontFamily: 'Fredoka One'
-            }}>
+            <div className="header">
                 <h1>Gotta Catch 'Em All!</h1>
                 <h2>San Diego Pokédex</h2>
             </div>

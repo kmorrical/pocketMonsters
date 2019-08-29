@@ -23,13 +23,13 @@ class App extends Component {
                 backgroundColor: 'orange'
             },
             activeMonsters: [],
-            searchVal: '',
             singleMonsterLocations: [],
             searchMode: false
         };
     };
 
     componentDidMount() {
+        //calls api on mount to minimize calls
         this.fetchMonsters();
     };
 
@@ -85,26 +85,21 @@ class App extends Component {
             },
             "type": "JSON"
         }).then(response => {
-            return response.text();
+            return response.json();
         }).then(res => {
-            const json = JSON.parse(res);
-            this.setState({singleMonsterLocations: json.locations});
+            this.setState({singleMonsterLocations: res.locations});
         }).catch(err => {
             console.log(err);
         });
 
-        this.setState({singleMonster: activeMonsters[index]});
-        this.setState({singleMonsterVisible: true});
-    };
-
-    changeSearchVal = (event) => {
-        this.setState({searchVal: event.target.value});
+        this.setState({singleMonster: activeMonsters[index], singleMonsterVisible: true});
     };
 
     searchMonsters = (term) => {
-        const {activeMonsters} = this.state;
+        const {monsters} = this.state;
         let found = [];
-        const foundMonster = find(activeMonsters, function (o) {
+
+        const foundMonster = find(monsters, function (o) {
             return o.name === term;
         });
         if (foundMonster !== undefined) {
@@ -172,7 +167,7 @@ class App extends Component {
     };
 
     clearSelected = () => {
-        this.setState({searchVal: '', searchMode: false});
+        this.setState({searchMode: false});
         this.accessAll();
     };
 
@@ -196,7 +191,6 @@ class App extends Component {
             view = <PokedexMain
                 accessSaved={this.accessSaved}
                 accessAll={this.accessAll}
-                changeSearchVal={this.changeSearchVal}
                 searchMonsters={this.searchMonsters}
                 clearSelected={this.clearSelected}
                 activeMonsters={activeMonsters}
