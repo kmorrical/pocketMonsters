@@ -15,7 +15,6 @@ function PokedexMain(props) {
     } = props;
 
     const [searchTerm, setSearch] = useState("");
-    console.log("AM", activeMonsters);
 
     return (
         <div>

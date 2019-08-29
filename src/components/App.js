@@ -38,7 +38,7 @@ class App extends Component {
         this.setState({loading: true});
         let monstersCopy;
 
-        await fetch(monstersAPI)
+        fetch(monstersAPI)
             .then(response => response.json())
             .then(json => {
                 monstersCopy = json.results
