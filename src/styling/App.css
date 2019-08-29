@@ -121,7 +121,7 @@
     background-color: lightgray;
 }
 
-.noResults{
+.noResults {
     margin-top: 10px;
     color: red;
 }
@@ -130,6 +130,7 @@
     margin-top: 10px;
     color: green;
 }
+
 /*//todo sticky header?*/
 .header {
     background-image: url("https://res.cloudinary.com/osidekweenyasss/image/upload/v1566691836/poke2.jpg");
@@ -179,7 +180,6 @@
     display: flex;
     justify-content: center;
 }
-
 
 @font-face {
     font-family: 'Fredoka One';

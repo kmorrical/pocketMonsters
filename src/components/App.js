@@ -107,11 +107,10 @@ class App extends Component {
         const foundMonster = find(activeMonsters, function (o) {
             return o.name === term;
         });
-        if (foundMonster !== undefined) { 
+        if (foundMonster !== undefined) {
             found.push(foundMonster);
             this.setState({activeMonsters: found});
-        }
-        else {
+        } else {
             this.setState({activeMonsters: []});
         }
         this.setState({searchMode: true});

@@ -29,21 +29,24 @@ function SingleMonsterDetail(props) {
             </div>
             <div className="leftCol">
                 <div className="alignCenter">
-                <PokeCard monster={activeMonster} singleMonsterVisible={false} index={activeMonsterIndex}/>
+                    <PokeCard
+                        monster={activeMonster}
+                        singleMonsterVisible={false}
+                        index={activeMonsterIndex}/>
                 </div>
                 <div className="monsterDetails">
                     <p>
-                        <b className="titleText">Height: 
+                        <b className="titleText">Height:
                         </b>
                         {activeMonster.additionalInfo.height}
                     </p>
                     <p>
-                        <b className="titleText">Weight: 
+                        <b className="titleText">Weight:
                         </b>
                         {activeMonster.additionalInfo.weight}
                     </p>
                     <p>
-                        <b className="titleText">In Bag 
+                        <b className="titleText">In Bag
                         </b>
                         <input type="checkbox" checked={activeMonster.InBag} onChange={changeCheckbox}/>
                     </p>
@@ -53,12 +56,12 @@ function SingleMonsterDetail(props) {
                             .types
                             .map(function (type, i) {
                                 return <p key={i}>
-                                    <b className="titleText">Type {i + 1}: 
+                                    <b className="titleText">Type {i + 1}:
                                     </b>{type.type.name}</p>;
                             })}
                     </div>
                     <p>
-                        <b className="titleText">Description: 
+                        <b className="titleText">Description:
                         </b>
                         <br/>{mockText}
                     </p>
@@ -69,7 +72,7 @@ function SingleMonsterDetail(props) {
                     <MonsterMap locations={locations}/>
                 </div>
                 <div className="abilities">
-                    <b>Abilities: 
+                    <b>Abilities:
                     </b>
                     {activeMonster
                         .additionalInfo

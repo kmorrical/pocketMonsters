@@ -11,10 +11,11 @@ function PokedexMain(props) {
         singleMonsterVisible,
         leftStyle,
         loading,
-        rightStyle,
+        rightStyle
     } = props;
 
-    const [searchTerm, setSearch] = useState("");
+    const [searchTerm,
+        setSearch] = useState("");
 
     return (
         <div>
@@ -40,9 +41,15 @@ function PokedexMain(props) {
                 <button
                     className="buttonRightSearch"
                     onClick={() => searchMonsters(searchTerm)}>Go!</button>
-                    {(searchMode && (activeMonsters.length === 0)) ? (<p className="noResults">No Search Results Found</p>) :
-                    (searchMode && (activeMonsters.length !== 0)) ? (<p className="foundResults">Search Results for: {activeMonsters[0].name}</p>)
-                    : null}
+                {(searchMode && (activeMonsters.length === 0))
+                    ? (
+                        <p className="noResults">No Search Results Found</p>
+                    )
+                    : (searchMode && (activeMonsters.length !== 0))
+                        ? (
+                            <p className="foundResults">Search Results for: {activeMonsters[0].name}</p>
+                        )
+                        : null}
             </div>
             {loading
                 ? (
