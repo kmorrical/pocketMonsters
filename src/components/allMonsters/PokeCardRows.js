@@ -4,7 +4,7 @@ import PokeCard from '../common/PokeCard.js';
 function PokeCardRows(props) {
     const {monsters, singleMonsterVisible} = props;
     return (
-        <div className="PokeContainer">
+        <div className="PokeRowContainer">
             {monsters
                 .map(function (monster, i) {
                     return <PokeCard

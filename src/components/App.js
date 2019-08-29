@@ -107,9 +107,14 @@ class App extends Component {
         const foundMonster = find(activeMonsters, function (o) {
             return o.name === term;
         });
-
-        found.push(foundMonster);
-        this.setState({activeMonsters: found, searchMode: true});
+        if (foundMonster !== undefined) { 
+            found.push(foundMonster);
+            this.setState({activeMonsters: found});
+        }
+        else {
+            this.setState({activeMonsters: []});
+        }
+        this.setState({searchMode: true});
     };
 
     //return to page with this
@@ -150,7 +155,7 @@ class App extends Component {
                 backgroundColor: 'white'
             }
         });
-        this.setState({activeMonsters: savedMonsters});
+        this.setState({activeMonsters: savedMonsters, searchMode: false});
     };
 
     accessAll = () => {
@@ -162,7 +167,8 @@ class App extends Component {
             rightStyle: {
                 backgroundColor: 'orange'
             },
-            activeMonsters: monsters
+            activeMonsters: monsters,
+            searchMode: false
         });
     };
 
@@ -179,7 +185,8 @@ class App extends Component {
             singleMonster,
             activeMonsters,
             singleMonsterLocations,
-            loading
+            loading,
+            searchMode
         } = this.state;
 
         let view;
@@ -197,7 +204,8 @@ class App extends Component {
                 singleMonsterVisible={this.singleMonsterVisible}
                 leftStyle={leftStyle}
                 rightStyle={rightStyle}
-                loading={loading}/>
+                loading={loading}
+                searchMode={searchMode}/>
         } else {
             view = <SingleMonsterDetail
                 saveRemoveMonster={this.saveRemoveMonster}

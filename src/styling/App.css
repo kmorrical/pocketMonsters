@@ -40,7 +40,7 @@
 
 .abilities {
     text-align: left;
-    margin-top: 53%;
+    margin-top: 420px;
     margin-left: 40px;
 }
 
@@ -49,7 +49,9 @@
 }
 
 .alignCenter {
-    text-align: center;
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;
 }
 
 .rightCol {
@@ -66,14 +68,16 @@
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  margin-top: 40px;
-  height: 120px;
-  text-align: center;
-  animation: spin 2s linear infinite;
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    margin-top: 40px;
+    height: 120px;
+    text-align: center;
+    animation: spin 2s linear infinite;
 }
 
 .loaderBox {
@@ -82,8 +86,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .buttonLeft {
@@ -112,6 +121,15 @@
     background-color: lightgray;
 }
 
+.noResults{
+    margin-top: 10px;
+    color: red;
+}
+
+.foundResults {
+    margin-top: 10px;
+    color: green;
+}
 /*//todo sticky header?*/
 .header {
     background-image: url("https://res.cloudinary.com/osidekweenyasss/image/upload/v1566691836/poke2.jpg");
@@ -125,15 +143,16 @@
     text-align: center;
 }
 
-.PokeContainer {
+.PokeRowContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
+    margin-top: 40px;
 }
 
-.titleText{
+.titleText {
     margin-right: 10px;
+    color: orange;
 }
 
 .pokeImg {
@@ -163,10 +182,10 @@
 
 
 @font-face {
-  font-family: 'Fredoka One';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Fredoka One'), local('FredokaOne-Regular'), url(https://fonts.gstatic.com/s/fredokaone/v7/k3kUo8kEI-tA1RRcTZGmTlHGCaen8wf-.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    font-family: 'Fredoka One';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Fredoka One'), local('FredokaOne-Regular'), url(https://fonts.gstatic.com/s/fredokaone/v7/k3kUo8kEI-tA1RRcTZGmTlHGCaen8wf-.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
