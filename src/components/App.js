@@ -38,6 +38,7 @@ class App extends Component {
         this.setState({loading: true});
         let monstersCopy;
 
+        //changed this because do not need await on top of 'then'
         fetch(monstersAPI)
             .then(response => response.json())
             .then(json => {
@@ -60,6 +61,8 @@ class App extends Component {
             const name = monstersCopy[i].name;
             const newAPI = baseAPI + name;
             const response = await fetch(newAPI);
+            //this needs to await of else if will cause problems and try to already load photos and 
+            //then cause app to crash
             const json = await response.json();
             monstersCopy[i].additionalInfo = json;
             monstersCopy[i].InBag = false;
