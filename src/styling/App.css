@@ -2,12 +2,6 @@
     text-align: center;
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
-    pointer-events: none;
-}
-
 .App-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -138,6 +132,10 @@
 
 }
 
+.titleText{
+    margin-right: 10px;
+}
+
 .pokeImg {
     height: 150px;
     width: 150px;
@@ -150,6 +148,7 @@
     height: 150px;
     width: 150px;
     margin: 20px;
+    text-align: center;
 }
 
 .App-link {
@@ -162,16 +161,6 @@
     justify-content: center;
 }
 
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
 
 @font-face {
   font-family: 'Fredoka One';
