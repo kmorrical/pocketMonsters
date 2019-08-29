@@ -33,7 +33,7 @@ class App extends Component {
         this.fetchMonsters();
     };
 
-    fetchMonsters = async() => {
+    fetchMonsters = () => {
         //set loading to true before fetch to activate spinner
         this.setState({loading: true});
         let monstersCopy;
