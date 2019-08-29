@@ -14,8 +14,8 @@ function PokedexMain(props) {
         rightStyle
     } = props;
 
-    const [searchTerm,
-        setSearch] = useState("");
+    const [searchTerm, setSearch] = useState("");
+    console.log("AM", activeMonsters);
 
     return (
         <div>

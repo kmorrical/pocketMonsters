@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow, configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import PokeCard from '../common/PokeCard.js/index.js';
+import PokeCard from './PokeCard.js';
 configure({adapter: new Adapter()})
 
 describe('<PokeCard />', () => {
