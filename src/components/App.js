@@ -59,8 +59,8 @@ class App extends Component {
             const baseAPI = "https://pokeapi.co/api/v2/pokemon/";
             const name = monstersCopy[i].name;
             const newAPI = baseAPI + name;
-            const response = await fetch(newAPI)
-            const json = await response.json()
+            const response = await fetch(newAPI);
+            const json = await response.json();
             monstersCopy[i].additionalInfo = json;
             monstersCopy[i].InBag = false;
         }
